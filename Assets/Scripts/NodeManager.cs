@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems; 
 
 public class NodeManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class NodeManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            chosenPrefab = 0;
+            ChoosePrefab(0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -35,9 +36,14 @@ public class NodeManager : MonoBehaviour
         {
             chosenPrefab = 2;
         }
-
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            chosenPrefab = 3;
+        }
+        
         if (Input.GetMouseButtonDown(0))
         {
+            if(IsPointerOverUI())return;
             if(buildingMode)PlaceNewNode();
             else
             {
@@ -60,6 +66,7 @@ public class NodeManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
+            if(IsPointerOverUI())return;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
@@ -72,6 +79,10 @@ public class NodeManager : MonoBehaviour
             }
         }
     }
+    private bool IsPointerOverUI()
+    {
+        return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+    } 
     private void DeleteNode(CircuitNode selectedNode)
     {
         foreach (var nodePort in selectedNode.nodePorts)
@@ -156,5 +167,10 @@ public class NodeManager : MonoBehaviour
             placedWires.Remove(wire);
             Destroy(wire.gameObject);
         }
+    }
+
+    public void ChoosePrefab(int prefabNumber)
+    {
+        chosenPrefab = prefabNumber;
     }
 }
