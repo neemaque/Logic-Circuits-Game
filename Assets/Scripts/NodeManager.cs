@@ -8,6 +8,7 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private List<GameObject> nodePrefabs = new List<GameObject>();
     [SerializeField] private List<CircuitNode> placedNodes = new List<CircuitNode>();
     [SerializeField] private List<Wire> placedWires = new List<Wire>();
+    [SerializeField] private LayerMask groundLayer;
 
     public int chosenPrefab;
     private bool buildingMode;
@@ -103,7 +104,7 @@ public class NodeManager : MonoBehaviour
     private void PlaceNewNode()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer) && !IsSpaceOccupied(hit.point))
         {
             GameObject newNodeObj = Instantiate(nodePrefabs[chosenPrefab], hit.point, Quaternion.identity);
             CircuitNode newNode = newNodeObj.GetComponent<CircuitNode>();
@@ -115,6 +116,19 @@ public class NodeManager : MonoBehaviour
             }
         }
     }
+    bool IsSpaceOccupied(Vector3 position)
+    {
+        Collider[] colliders = Physics.OverlapSphere(position, 1.5f);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.GetComponent<CircuitNode>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void RemoveLastNode()
     {
         if (placedNodes.Count > 0)
