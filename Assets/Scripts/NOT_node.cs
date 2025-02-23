@@ -6,7 +6,6 @@ public class NOT_node : CircuitNode
 {
     public override void UpdateState()
     {
-        Debug.Log("NOT updated");
         if(nodeInputs[0] != null)state = !(nodeInputs[0].getState());
         else
         {

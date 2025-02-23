@@ -24,9 +24,10 @@ public class UI : MonoBehaviour
     public string nodeName(int nodeNumber)
     {
         if(nodeNumber == 0)return "INPUT";
-        if(nodeNumber == 1)return "AND";
-        if(nodeNumber == 2)return "NOT";
-        if(nodeNumber == 3)return "OR";
+        if(nodeNumber == 1)return "OUTPUT";
+        if(nodeNumber == 2)return "AND";
+        if(nodeNumber == 3)return "NOT";
+        if(nodeNumber == 4)return "OR";
         else return "NODE";
     }
 }

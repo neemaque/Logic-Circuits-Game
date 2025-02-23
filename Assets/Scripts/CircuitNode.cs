@@ -6,6 +6,7 @@ public class CircuitNode : Node
     public List<CircuitNode> nodeInputs = new List<CircuitNode>();
     public List<CircuitNode> nodeOutputs = new List<CircuitNode>();
     [SerializeField] public List<NodePort> nodePorts = new List<NodePort>();
+    public bool nonDeletable;
     public string type;
     public void Update()
     {

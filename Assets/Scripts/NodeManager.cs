@@ -16,29 +16,17 @@ public class NodeManager : MonoBehaviour
     {
         buildingMode = false;
         chosenPrefab = 0;
+        FindAllNodes();
     }
-
+    private void FindAllNodes()
+    {
+        placedNodes = new List<CircuitNode>(FindObjectsOfType<CircuitNode>());
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Escape) && buildingMode)
         {
-            buildingMode = !buildingMode;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChoosePrefab(0);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            chosenPrefab = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            chosenPrefab = 2;
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            chosenPrefab = 3;
+            buildingMode = false;
         }
         
         if (Input.GetMouseButtonDown(0))
@@ -71,7 +59,7 @@ public class NodeManager : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 CircuitNode selectedNode = hit.collider.GetComponent<CircuitNode>();
-                if (selectedNode != null)
+                if (selectedNode != null && !selectedNode.nonDeletable)
                 {
                     Debug.Log("deleting" + selectedNode);
                     DeleteNode(selectedNode);
@@ -123,6 +111,7 @@ public class NodeManager : MonoBehaviour
             {
                 placedNodes.Add(newNode);
                 newNode.UpdateState();
+                buildingMode = false;
             }
         }
     }
@@ -171,6 +160,7 @@ public class NodeManager : MonoBehaviour
 
     public void ChoosePrefab(int prefabNumber)
     {
+        buildingMode = true;
         chosenPrefab = prefabNumber;
     }
 }
