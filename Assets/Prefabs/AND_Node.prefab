@@ -300,6 +300,7 @@ MonoBehaviour:
   - {fileID: 2074237812361990569}
   - {fileID: 6496321377573405741}
   - {fileID: 8648831390356336163}
+  nonDeletable: 0
   type: 
 --- !u!65 &7974326993044403078
 BoxCollider:

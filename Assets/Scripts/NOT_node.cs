@@ -11,10 +11,6 @@ public class NOT_node : CircuitNode
         {
             state = true;
         }
-        foreach (var output in nodeOutputs)
-        {
-            if(output == null)continue;
-            output.UpdateState();
-        }
+        StartCoroutine(Propagate());
     }
 }

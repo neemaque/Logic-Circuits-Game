@@ -28,6 +28,7 @@ public class UI : MonoBehaviour
         if(nodeNumber == 2)return "AND";
         if(nodeNumber == 3)return "NOT";
         if(nodeNumber == 4)return "OR";
+        if(nodeNumber == 5)return "FORK";
         else return "NODE";
     }
 }

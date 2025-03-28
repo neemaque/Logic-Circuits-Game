@@ -42,6 +42,7 @@ public class NodeManager : MonoBehaviour
                     NodePort selectedPort = hit.collider.GetComponent<NodePort>();
                     if (selectedPort != null)
                     {
+                        Debug.Log(selectedPort);
                         SelectPort(selectedPort);
                     }
                     INPUT_node selectedNode = hit.collider.GetComponent<INPUT_node>();

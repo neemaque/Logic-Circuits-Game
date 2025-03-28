@@ -198,6 +198,7 @@ MonoBehaviour:
   nodePorts:
   - {fileID: 2074237812361990569}
   - {fileID: 8648831390356336163}
+  nonDeletable: 0
   type: 
 --- !u!1 &4856650136046563012
 GameObject:

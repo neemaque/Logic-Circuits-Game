@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class CircuitNode : Node
@@ -19,11 +20,7 @@ public class CircuitNode : Node
     }
     public virtual void UpdateState()
     {
-        if(nodeOutputs[0] == null)return;
-        foreach (var outputs in nodeOutputs)
-        {
-            outputs.UpdateState();
-        }
+        StartCoroutine(Propagate());
     }
     public void setColor(bool state)
     {
@@ -58,5 +55,15 @@ public class CircuitNode : Node
     public void removeOutput(int portNumber)
     {
         nodeOutputs[portNumber] = null;
+    }
+    public IEnumerator Propagate()
+    {
+        yield return new WaitForSeconds(0.2f);
+        
+        foreach (var output in nodeOutputs)
+        {
+            if(output == null)continue;
+            output.UpdateState();
+        }
     }
 }
