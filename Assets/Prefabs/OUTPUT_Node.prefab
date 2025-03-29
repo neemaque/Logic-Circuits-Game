@@ -75,7 +75,8 @@ MonoBehaviour:
   nodeOutputs: []
   nodePorts:
   - {fileID: 2074237812361990569}
-  type: 
+  nonDeletable: 0
+  type: 1
 --- !u!1 &4856650136046563012
 GameObject:
   m_ObjectHideFlags: 0

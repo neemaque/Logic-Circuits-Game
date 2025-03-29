@@ -8,7 +8,7 @@ public class CircuitNode : Node
     public List<CircuitNode> nodeOutputs = new List<CircuitNode>();
     [SerializeField] public List<NodePort> nodePorts = new List<NodePort>();
     public bool nonDeletable;
-    public string type;
+    public int type;
     public void Update()
     {
         setColor(state);

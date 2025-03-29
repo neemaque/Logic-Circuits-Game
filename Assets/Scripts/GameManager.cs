@@ -4,16 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public bool[] allowedNodes = new bool[32];
-    [SerializeField] private UI levelUI;
+    public int[] allowedNodes = new int[32];
     private void Start()
     {
-        for(int i = 0; i < 32; i++)
-        {
-            if(allowedNodes[i])
-            {
-                levelUI.SpawnButton(i);
-            }
-        }
+        
     }
 }

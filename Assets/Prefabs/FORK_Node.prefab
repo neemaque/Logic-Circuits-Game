@@ -325,7 +325,7 @@ MonoBehaviour:
   - {fileID: 8502578329580458129}
   - {fileID: 4032130732737825737}
   nonDeletable: 0
-  type: 
+  type: 5
 --- !u!1 &4856650136046563012
 GameObject:
   m_ObjectHideFlags: 0

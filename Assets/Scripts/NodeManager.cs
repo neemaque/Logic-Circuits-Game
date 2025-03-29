@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class NodeManager : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private NodeUI nodeUI;
     [SerializeField] private List<GameObject> nodePrefabs = new List<GameObject>();
     [SerializeField] private List<CircuitNode> placedNodes = new List<CircuitNode>();
     [SerializeField] private List<Wire> placedWires = new List<Wire>();
@@ -13,8 +15,18 @@ public class NodeManager : MonoBehaviour
     public int chosenPrefab;
     private bool buildingMode;
     private NodePort firstNodePort;
+
+    private int[] allowedNodes = new int[32];
     private void Start()
     {
+        allowedNodes = gameManager.allowedNodes;
+        for(int i = 0; i < 32; i++)
+        {
+            if(allowedNodes[i] > 0)
+            {
+                nodeUI.SpawnButton(i, allowedNodes[i]);
+            }
+        }
         buildingMode = false;
         chosenPrefab = 0;
         FindAllNodes();
@@ -80,6 +92,9 @@ public class NodeManager : MonoBehaviour
             DeleteWire(nodePort);
         }
         placedNodes.Remove(selectedNode);
+        int nodeID = selectedNode.type;
+        allowedNodes[nodeID]++;
+        nodeUI.UpdateNumber(nodeID, allowedNodes[nodeID]);
         Destroy(selectedNode.gameObject);
     }
     private void ToggleInputNode(INPUT_node selectedNode)
@@ -114,6 +129,8 @@ public class NodeManager : MonoBehaviour
                 placedNodes.Add(newNode);
                 newNode.UpdateState();
                 buildingMode = false;
+                allowedNodes[chosenPrefab]--;
+                nodeUI.UpdateNumber(chosenPrefab, allowedNodes[chosenPrefab]);
             }
         }
     }
@@ -175,6 +192,7 @@ public class NodeManager : MonoBehaviour
 
     public void ChoosePrefab(int prefabNumber)
     {
+        if(allowedNodes[prefabNumber] == 0)return;
         buildingMode = true;
         chosenPrefab = prefabNumber;
     }
