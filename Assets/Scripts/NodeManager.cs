@@ -11,6 +11,8 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private List<CircuitNode> placedNodes = new List<CircuitNode>();
     [SerializeField] private List<Wire> placedWires = new List<Wire>();
     [SerializeField] private LayerMask groundLayer;
+    
+    private bool blockInput;
 
     public int chosenPrefab;
     private bool buildingMode;
@@ -31,12 +33,25 @@ public class NodeManager : MonoBehaviour
         chosenPrefab = 0;
         FindAllNodes();
     }
+    public void BlockInput()
+    {
+        blockInput = true;
+    }
+    public void unBlockInput()
+    {
+        blockInput = false;
+    }
     private void FindAllNodes()
     {
         placedNodes = new List<CircuitNode>(FindObjectsOfType<CircuitNode>());
     }
     void Update()
     {
+        if(blockInput)
+        {
+            buildingMode = false;
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape) && buildingMode)
         {
             buildingMode = false;
@@ -87,6 +102,12 @@ public class NodeManager : MonoBehaviour
     } 
     private void DeleteNode(CircuitNode selectedNode)
     {
+        selectedNode.SetState(false);
+        List<CircuitNode> nodeOutputs = selectedNode.nodeOutputs;
+        foreach(var nodeOutput in nodeOutputs)
+        {
+            if(nodeOutput != null)nodeOutput.UpdateState();
+        }
         foreach (var nodePort in selectedNode.nodePorts)
         {
             DeleteWire(nodePort);

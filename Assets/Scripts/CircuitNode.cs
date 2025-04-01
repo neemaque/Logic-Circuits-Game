@@ -58,7 +58,7 @@ public class CircuitNode : Node
     }
     public IEnumerator Propagate()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         
         foreach (var output in nodeOutputs)
         {
