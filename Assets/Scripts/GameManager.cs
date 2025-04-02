@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public NodeManager nodeManager;
+    public CameraSway cameraSway;
     public Canvas LevelIntroUI;
     public CheckingTextUI checkingTextUI;
     public int[] allowedNodes = new int[32];
@@ -30,20 +31,25 @@ public class GameManager : MonoBehaviour
     {
         checkingTextUI.StartCheck();
         nodeManager.BlockInput();
+        cameraSway.Lock();
         StartCoroutine(CheckSolution());
     }
     public IEnumerator CheckSolution()
     {
         bool correct = true;
+        
         foreach (CorrectSolution correctSolution in solutionEntries)
         {
             bool testPassed = true;
+            cameraSway.LookLeft();
             for(int i=0;i < numberOfInputs; i++)
             {
                 if(correctSolution.inputs[i] == false)inputNodes[i].SetOff();
                 else inputNodes[i].SetOn();
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
+            cameraSway.LookRight();
+            yield return new WaitForSeconds(1f);
             for(int i=0;i < numberOfOutputs; i++)
             {
                 if(correctSolution.outputs[i] != outputNodes[i].getState())testPassed = false;
@@ -52,6 +58,7 @@ public class GameManager : MonoBehaviour
             if(!testPassed)correct = false;
         }
         checkingTextUI.DoneChecking(correct);
+        cameraSway.Unlock();
         if(correct)
         {
             Debug.Log("correct");

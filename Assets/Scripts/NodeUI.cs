@@ -18,7 +18,7 @@ public class NodeUI : MonoBehaviour
     {
         GameObject newButton = Instantiate(nodeButtonPrefab, nodeButtonsPanel);
         nodeButtons[nodeNumber] = newButton;
-        newButton.transform.position += new Vector3(0, 75 * numberOfButtons, 0);
+        newButton.transform.position += new Vector3(150 * numberOfButtons, 0, 0);
         numberOfButtons++;
         newButton.GetComponent<Button>().onClick.AddListener(() => nodeManager.ChoosePrefab(nodeNumber));
         foreach (Transform child in newButton.transform)
