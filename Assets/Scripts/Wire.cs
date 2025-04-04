@@ -21,6 +21,7 @@ public class Wire : MonoBehaviour
     {
         if (startPort && endPort)
         {
+            setColor(startPort.getParent().getState());
             lineRenderer.SetPosition(0, startPort.transform.position);
             lineRenderer.SetPosition(1, endPort.transform.position);
         }
@@ -36,5 +37,12 @@ public class Wire : MonoBehaviour
         startPort.getParent().removeOutput(startPort.portNumber);
         endPort.getParent().removeInput(endPort.portNumber);
         Destroy(gameObject);
+    }
+    public void setColor(bool state)
+    {
+
+        Color newColor = Color.white;
+        if(state)newColor = Color.red;
+        lineRenderer.material.color = newColor;
     }
 }

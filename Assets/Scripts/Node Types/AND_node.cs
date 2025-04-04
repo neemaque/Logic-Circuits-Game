@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class AND_node : CircuitNode
 {
-    public void Awake()
-    {
-
-    }
     public override void UpdateState()
     {
         if(nodeInputs[0] != null && nodeInputs[1] != null)state = nodeInputs[0].getState() & nodeInputs[1].getState();
