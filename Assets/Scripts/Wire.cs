@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Wire : MonoBehaviour
 {
+    public bool isPreset;
     public NodePort startPort;
     public NodePort endPort;
     private LineRenderer lineRenderer;
@@ -21,7 +22,7 @@ public class Wire : MonoBehaviour
     {
         if (startPort && endPort)
         {
-            setColor(startPort.getParent().getState());
+            if(!isPreset)setColor(startPort.getParent().getState());
             lineRenderer.SetPosition(0, startPort.transform.position);
             lineRenderer.SetPosition(1, endPort.transform.position);
         }

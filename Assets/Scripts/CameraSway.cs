@@ -12,7 +12,7 @@ public class CameraSway : MonoBehaviour
 
     void Start()
     {
-        transform.rotation = Quaternion.Euler(120, 0, 0);
+        transform.rotation = Quaternion.Euler(100, 0, 0);
         screenWidth = Screen.width;
     }
 
