@@ -15,6 +15,8 @@ public class NodeManager : MonoBehaviour
     private bool blockInput;
 
     public int chosenPrefab;
+    private SelectNode currentSelectNode;
+    private List<SelectNode> selectNodes = new List<SelectNode>();
     private bool buildingMode;
     private NodePort firstNodePort;
 
@@ -44,9 +46,15 @@ public class NodeManager : MonoBehaviour
     private void FindAllNodes()
     {
         placedNodes = new List<CircuitNode>(FindObjectsOfType<CircuitNode>());
+        selectNodes = new List<SelectNode>(FindObjectsOfType<SelectNode>());
+        
     }
     void Update()
     {
+        foreach(SelectNode selectNode in selectNodes)
+        {
+            selectNode.setNumber(allowedNodes[selectNode.id]);
+        }
         if(blockInput)
         {
             buildingMode = false;
@@ -59,27 +67,32 @@ public class NodeManager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            if(IsPointerOverUI())return;
-            if(buildingMode)PlaceNewNode();
-            else
+            //if(IsPointerOverUI())return;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                NodePort selectedPort = hit.collider.GetComponent<NodePort>();
+                if (selectedPort != null && !buildingMode)
                 {
-                    NodePort selectedPort = hit.collider.GetComponent<NodePort>();
-                    if (selectedPort != null)
-                    {
-                        Debug.Log("Selected port:" + selectedPort);
-                        SelectPort(selectedPort);
-                    }
-                    INPUT_node selectedNode = hit.collider.GetComponent<INPUT_node>();
-                    if (selectedNode != null)
-                    {
-                        Debug.Log("Selected node:" + selectedNode);
-                        ToggleInputNode(selectedNode);
-                    }
+                    Debug.Log("Selected port:" + selectedPort);
+                    SelectPort(selectedPort);
+                }
+                INPUT_node selectedNode = hit.collider.GetComponent<INPUT_node>();
+                if (selectedNode != null && !buildingMode)
+                {
+                    Debug.Log("Selected node:" + selectedNode);
+                    ToggleInputNode(selectedNode);
+                }
+                SelectNode selectNode = hit.collider.GetComponent<SelectNode>();
+                if (selectNode != null)
+                {
+                    ChoosePrefab(selectNode.id);
+                    if(currentSelectNode != null)currentSelectNode.deSelect();
+                    selectNode.Select();
+                    currentSelectNode = selectNode;
                 }
             }
+            if(buildingMode)PlaceNewNode();
         }
         if (Input.GetMouseButtonDown(1))
         {
@@ -128,6 +141,8 @@ public class NodeManager : MonoBehaviour
         DeleteWire(selectedPort);
         if(!selectedPort.isInput)
         {
+            if(firstNodePort != null) firstNodePort.deSelect();
+            selectedPort.Select();
             firstNodePort = selectedPort;
             Debug.Log(firstNodePort.getParent());
         }
@@ -135,6 +150,7 @@ public class NodeManager : MonoBehaviour
         {
             CreateWire(firstNodePort, selectedPort);
             ConnectNodes(firstNodePort.getParent(), firstNodePort.portNumber, selectedPort.getParent(), selectedPort.portNumber);
+            firstNodePort.deSelect();
             firstNodePort = null;
         }
     }
@@ -151,6 +167,7 @@ public class NodeManager : MonoBehaviour
                 newNode.UpdateState();
                 buildingMode = false;
                 allowedNodes[chosenPrefab]--;
+                if(currentSelectNode != null) currentSelectNode.deSelect();
                 nodeUI.UpdateNumber(chosenPrefab, allowedNodes[chosenPrefab]);
             }
         }
@@ -214,6 +231,7 @@ public class NodeManager : MonoBehaviour
     public void ChoosePrefab(int prefabNumber)
     {
         if(allowedNodes[prefabNumber] == 0)return;
+        Debug.Log("chosen prefab " + prefabNumber);
         buildingMode = true;
         chosenPrefab = prefabNumber;
     }

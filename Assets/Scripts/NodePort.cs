@@ -6,9 +6,11 @@ public class NodePort : MonoBehaviour
 {
     public int portNumber;
     public bool isInput;
+    private Outline outline;
     void Start()
     {
-        
+        outline = gameObject.AddComponent<Outline>();
+        outline.enabled = false;
     }
 
     void Update()
@@ -22,5 +24,13 @@ public class NodePort : MonoBehaviour
     public CircuitNode getParent()
     {
         return transform.parent?.gameObject.GetComponent<CircuitNode>();
+    }
+    public void Select()
+    {
+        outline.enabled = true;
+    }
+    public void deSelect()
+    {
+        outline.enabled = false;
     }
 }
