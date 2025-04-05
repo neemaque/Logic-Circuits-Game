@@ -8,9 +8,25 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private MenuCamera menuCamera;
     private LevelNode currentNode;
     [SerializeField] private Transform initialCameraTransform;
+    [SerializeField] private AudioSource selectSound;
+    private List<LevelNode> placedNodes = new List<LevelNode>();
     private void Start()
     {
-
+        placedNodes = new List<LevelNode>(FindObjectsOfType<LevelNode>());
+        string lastLevel = PlayerPrefs.GetString("LastLevel");
+        Debug.Log("lastlevel: " +lastLevel);
+        if(lastLevel != "")
+        {
+            foreach(LevelNode node in placedNodes)
+            {
+                if(node.levelName == lastLevel)
+                {
+                    Debug.Log("found");
+                    SelectLevel(node);
+                    break;
+                }
+            }
+        }
     }
     void Update()
     {
@@ -22,6 +38,7 @@ public class MenuManager : MonoBehaviour
                 LevelNode selectedNode = hit.collider.GetComponent<LevelNode>();
                 if (selectedNode != null)
                 {
+                    selectSound.Play();
                     if(selectedNode.isMenu)
                     {
                         MenuButton(selectedNode);
@@ -50,6 +67,7 @@ public class MenuManager : MonoBehaviour
         {
             if(selectedNode.isExit)
             {
+                PlayerPrefs.SetString("LastLevel", "");
                 Debug.Log("exiting");
                 Application.Quit();
             }

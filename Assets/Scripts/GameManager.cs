@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public OUTPUT_node[] outputNodes = new OUTPUT_node[2];
     public int numberOfInputs = 2;
     public int numberOfOutputs = 2;
+    public AudioSource completeSound;
     public int stars;
     private int[] initialNodeNumber = new int[32];
     
@@ -100,7 +101,9 @@ public class GameManager : MonoBehaviour
     }
     public void EndLevel()
     {
+        completeSound.Play();
         PlayerPrefs.SetInt(levelName + "_Completed", 1);
+        PlayerPrefs.SetString("LastLevel", levelName);
         
         timer.StopTimer();
         float prevTime = PlayerPrefs.GetFloat(levelName + "_Time");

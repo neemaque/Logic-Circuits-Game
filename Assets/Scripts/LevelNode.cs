@@ -9,7 +9,7 @@ public class LevelNode : MonoBehaviour
     [SerializeField] public bool isExit;
     [SerializeField] private LevelNode target;
     [SerializeField] private string nodeName;
-    [SerializeField] private string levelName;
+    [SerializeField] public string levelName;
     [SerializeField] public string sceneName;
     [SerializeField] public int requiredStars;
     [SerializeField] private TextMesh text;

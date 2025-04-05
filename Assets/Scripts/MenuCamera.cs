@@ -6,7 +6,7 @@ public class MenuCamera : MonoBehaviour
 {
     public Transform targetPosition;
     public float speed = 5f;
-    private void Start()
+    private void Awake()
     {
         targetPosition = transform;
     }

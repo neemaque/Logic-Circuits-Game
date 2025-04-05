@@ -11,6 +11,10 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private List<CircuitNode> placedNodes = new List<CircuitNode>();
     [SerializeField] private List<Wire> placedWires = new List<Wire>();
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private AudioSource selectSound;
+    [SerializeField] private AudioSource placeSound;
+    [SerializeField] private AudioSource connectSound;
+    [SerializeField] private AudioSource deleteSound;
     
     private bool blockInput;
 
@@ -115,6 +119,7 @@ public class NodeManager : MonoBehaviour
     } 
     private void DeleteNode(CircuitNode selectedNode)
     {
+        deleteSound.Play();
         selectedNode.SetState(false);
         List<CircuitNode> nodeOutputs = selectedNode.nodeOutputs;
         foreach(var nodeOutput in nodeOutputs)
@@ -145,6 +150,7 @@ public class NodeManager : MonoBehaviour
             selectedPort.Select();
             firstNodePort = selectedPort;
             Debug.Log(firstNodePort.getParent());
+            selectSound.Play();
         }
         else if(firstNodePort != null)
         {
@@ -169,6 +175,7 @@ public class NodeManager : MonoBehaviour
                 allowedNodes[chosenPrefab]--;
                 if(currentSelectNode != null) currentSelectNode.deSelect();
                 nodeUI.UpdateNumber(chosenPrefab, allowedNodes[chosenPrefab]);
+                placeSound.Play();
             }
         }
     }
@@ -201,6 +208,7 @@ public class NodeManager : MonoBehaviour
         Debug.Log(into);
         into.changeInput(from, intoPort);
         from.changeOutput(into, fromPort);
+        connectSound.Play();
     }
     private void CreateWire(NodePort start, NodePort end)
     {
@@ -230,6 +238,7 @@ public class NodeManager : MonoBehaviour
 
     public void ChoosePrefab(int prefabNumber)
     {
+        selectSound.Play();
         if(allowedNodes[prefabNumber] == 0)return;
         Debug.Log("chosen prefab " + prefabNumber);
         buildingMode = true;
