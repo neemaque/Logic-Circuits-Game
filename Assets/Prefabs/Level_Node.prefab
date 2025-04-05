@@ -67,7 +67,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 108
+    m_FontSize: 93
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -223,7 +223,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 61
+    m_FontSize: 47
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
@@ -429,10 +429,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0341a28334c73843b7f503d65c6a89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMenu: 0
+  isExit: 0
+  target: {fileID: 0}
+  nodeName: 
   levelName: LVL 1
+  sceneName: 
+  requiredStars: 0
   text: {fileID: 4859473997010453773}
   outline: {fileID: 4810512514928147688}
   ui: {fileID: 7301424184400608253}
+  starsUi: {fileID: 314831682899900765}
+  timeUi: {fileID: 104536870759710297}
 --- !u!114 &4810512514928147688
 MonoBehaviour:
   m_ObjectHideFlags: 0

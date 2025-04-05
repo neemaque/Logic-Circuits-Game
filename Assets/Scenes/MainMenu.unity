@@ -1008,6 +1008,10 @@ PrefabInstance:
       propertyPath: levelName
       value: LVL 3A
       objectReference: {fileID: 0}
+    - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
+      propertyPath: requiredStars
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4674732733017559606, guid: ce065c1494c53304292767f2c3475534, type: 3}
       propertyPath: m_Name
       value: Level_Node (2)
@@ -1244,8 +1248,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 365574049}
     m_Modifications:
     - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
-      propertyPath: levelName
+      propertyPath: nodeName
       value: LVL 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
+      propertyPath: levelName
+      value: lvl2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
+      propertyPath: requiredStars
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4674732733017559606, guid: ce065c1494c53304292767f2c3475534, type: 3}
       propertyPath: m_Name
@@ -2215,6 +2227,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 365574049}
     m_Modifications:
+    - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
+      propertyPath: nodeName
+      value: LVL 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
+      propertyPath: levelName
+      value: lvl1
+      objectReference: {fileID: 0}
     - target: {fileID: 1179519140038497454, guid: ce065c1494c53304292767f2c3475534, type: 3}
       propertyPath: sceneName
       value: SampleScene

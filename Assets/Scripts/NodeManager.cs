@@ -217,4 +217,6 @@ public class NodeManager : MonoBehaviour
         buildingMode = true;
         chosenPrefab = prefabNumber;
     }
+    
+    
 }
