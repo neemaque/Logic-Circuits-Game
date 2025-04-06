@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
         {
             bool testPassed = true;
             cameraSway.LookLeft();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             for(int i=0;i < numberOfInputs; i++)
             {
                 if(correctSolution.inputs[i] == false)inputNodes[i].SetOff();
