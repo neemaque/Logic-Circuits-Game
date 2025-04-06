@@ -9,8 +9,17 @@ public class NodePort : MonoBehaviour
     private Outline outline;
     void Start()
     {
-        outline = gameObject.AddComponent<Outline>();
-        outline.enabled = false;
+        Outline existingOutline = gameObject.GetComponent<Outline>();
+        if (existingOutline != null)
+        {
+            outline = existingOutline;
+        }
+        else
+        {
+            outline = gameObject.AddComponent<Outline>();
+            outline.enabled = false;
+        }
+        
     }
 
     void Update()

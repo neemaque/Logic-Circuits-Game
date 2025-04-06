@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class NodeManager : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private Tutorial tutorial;
     [SerializeField] private NodeUI nodeUI;
     [SerializeField] private List<GameObject> nodePrefabs = new List<GameObject>();
     [SerializeField] private List<CircuitNode> placedNodes = new List<CircuitNode>();
@@ -139,6 +140,10 @@ public class NodeManager : MonoBehaviour
     private void ToggleInputNode(INPUT_node selectedNode)
     {
         selectedNode.Toggle();
+        placeSound.Play();
+
+        TutorialProgress(3);
+        TutorialProgress(2);
     }
     private void SelectPort(NodePort selectedPort)
     {
@@ -151,6 +156,8 @@ public class NodeManager : MonoBehaviour
             firstNodePort = selectedPort;
             Debug.Log(firstNodePort.getParent());
             selectSound.Play();
+
+            TutorialProgress(0);
         }
         else if(firstNodePort != null)
         {
@@ -158,6 +165,10 @@ public class NodeManager : MonoBehaviour
             ConnectNodes(firstNodePort.getParent(), firstNodePort.portNumber, selectedPort.getParent(), selectedPort.portNumber);
             firstNodePort.deSelect();
             firstNodePort = null;
+
+            TutorialProgress(1);
+            TutorialProgress(7);
+            TutorialProgress(6);
         }
     }
     private void PlaceNewNode()
@@ -245,5 +256,11 @@ public class NodeManager : MonoBehaviour
         chosenPrefab = prefabNumber;
     }
     
-    
+    private void TutorialProgress(int prerequisite)
+    {
+        if(tutorial != null)
+        {
+            if(tutorial.progress == prerequisite) tutorial.progress++;
+        }
+    }
 }
