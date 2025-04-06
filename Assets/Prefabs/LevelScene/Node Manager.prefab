@@ -58,6 +58,7 @@ MonoBehaviour:
   - {fileID: 4674732733017559606, guid: 872c574255cb473469412c4c9a725385, type: 3}
   - {fileID: 4674732733017559606, guid: 722601bddb5e52f4b9a9220619132a7d, type: 3}
   - {fileID: 4674732733017559606, guid: 1d241a47f16b2bc40a3cede0b5fe26d4, type: 3}
+  - {fileID: 4674732733017559606, guid: 9d9ec1f1784b72f4e862d57406f11bf5, type: 3}
   placedNodes: []
   placedWires: []
   groundLayer:

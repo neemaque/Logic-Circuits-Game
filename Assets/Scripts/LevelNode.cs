@@ -81,7 +81,7 @@ public class LevelNode : MonoBehaviour
     public bool isUnlocked()
     {
         int totalStars = 0;
-        totalStars = PlayerPrefs.GetInt("lvl1" + "_Stars") + PlayerPrefs.GetInt("lvl2" + "_Stars") + PlayerPrefs.GetInt("lvl3" + "_Stars");
+        totalStars = PlayerPrefs.GetInt("lvl1" + "_Stars") + PlayerPrefs.GetInt("lvl2" + "_Stars") + PlayerPrefs.GetInt("lvl3" + "_Stars") + PlayerPrefs.GetInt("lvl4" + "_Stars") + PlayerPrefs.GetInt("lvl5a" + "_Stars") + PlayerPrefs.GetInt("lvl6" + "_Stars");
         if(totalStars < requiredStars)return false;
         else return true;
     }

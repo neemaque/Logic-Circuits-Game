@@ -47,10 +47,14 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyUp(KeyCode.L))
+        {
+            ResetProgress();
+        }
     }
     public void SelectLevel(LevelNode selectedNode)
     {
-        if(selectedNode == currentNode)
+        if(selectedNode == currentNode && selectedNode.isUnlocked())
         {
             Debug.Log("start level");
             SceneManager.LoadScene(selectedNode.sceneName);
@@ -80,5 +84,36 @@ public class MenuManager : MonoBehaviour
         Transform nodePos = selectedNode.getPosition();
         menuCamera.targetPosition = initialCameraTransform;
         selectedNode.Select();
+    }
+    private void ResetProgress()
+    {
+        Debug.Log("resetting");
+        PlayerPrefs.SetString("LastLevel", "");
+        PlayerPrefs.SetInt("lvl1_Completed", 0);
+        PlayerPrefs.SetFloat("lvl1_Time", 0f);
+        PlayerPrefs.SetInt("lvl1_Stars", 0);
+        
+        PlayerPrefs.SetInt("lvl2_Completed", 0);
+        PlayerPrefs.SetFloat("lvl2_Time", 0f);
+        PlayerPrefs.SetInt("lvl2_Stars", 0);
+        
+        PlayerPrefs.SetInt("lvl3_Completed", 0);
+        PlayerPrefs.SetFloat("lvl3_Time", 0f);
+        PlayerPrefs.SetInt("lvl3_Stars", 0);
+
+        
+        PlayerPrefs.SetInt("lvl4_Completed", 0);
+        PlayerPrefs.SetFloat("lvl4_Time", 0f);
+        PlayerPrefs.SetInt("lvl4_Stars", 0);
+
+        PlayerPrefs.SetInt("lvl5a_Completed", 0);
+        PlayerPrefs.SetFloat("lvl5a_Time", 0f);
+        PlayerPrefs.SetInt("lvl5a_Stars", 0);
+
+        PlayerPrefs.SetInt("lvl6_Completed", 0);
+        PlayerPrefs.SetFloat("lvl6_Time", 0f);
+        PlayerPrefs.SetInt("lvl6_Stars", 0);
+
+        PlayerPrefs.Save();
     }
 }
