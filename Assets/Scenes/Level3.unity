@@ -2072,7 +2072,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539332283613667626, guid: e7490476c7807b747b5739be8f8bbf67, type: 3}
       propertyPath: m_Text
-      value: "Nice work. \nNow we can see what's inside the fridge late at night!"
+      value: "Nice work. \nNow we can see what's inside the fridge late at night!\nAND
+        you figured out how the AND gate works.\nIt's pretty simple, turns ON if
+        both of your inputs are ON."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923094242501107794, guid: e7490476c7807b747b5739be8f8bbf67, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -487.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

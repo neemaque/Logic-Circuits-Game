@@ -2068,10 +2068,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6539332283613667626, guid: e7490476c7807b747b5739be8f8bbf67, type: 3}
       propertyPath: m_Text
-      value: 'Thank you, what you''ve just done is the functionality of the
-
-        OR
-        gate, which now will be on your shelf as well.'
+      value: "Thank you, what you've just made has the functionality of the\nOR gate:
+        turns ON when at least one of the inputs are ON. \nThe OR gate now will be
+        on your shelf as well."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923094242501107794, guid: e7490476c7807b747b5739be8f8bbf67, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -488.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

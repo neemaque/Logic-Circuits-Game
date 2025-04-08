@@ -2148,7 +2148,14 @@ PrefabInstance:
       value: 'Great job! The funtionality of the circuit you made looks
 
         very
-        much like an XOR gate logic. We''ll add that to your shelf soon!'
+        much like an XOR gate logic. We''ll add that to your shelf soon!
+
+        XOR
+        (exclusive OR) works when the inputs are giving different signals.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7923094242501107794, guid: e7490476c7807b747b5739be8f8bbf67, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -489.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
